@@ -14,7 +14,7 @@ An offline-first personal life tracker built with Flutter. The interface is orga
 - **Habits & Routines** — daily habits, screen time, habits to build or break and routines.
 - **Activities & Experiences** — major activities, unexpected events, gap-filling activities, practice, new experiences, memories and time allocation.
 
-Each space opens in its own screen. Subsections are separated into collapsible cards. Repeating records such as ideas, tasks, expenses, interactions and activities can be added, edited and deleted individually. Edits are automatically saved after a short pause, with a manual save control whenever there are unsaved changes. Text inputs have explicit compact / multiline size limits so one field cannot expand to fill the screen. Single-line fields use a compact 62-pixel height; long-text fields use a bounded 140-pixel writing area. The section editor shows autosave state, supports manual retry after a failed save, and provides empty states for repeatable lists.
+Each space opens in its own screen. Subsections are separated into collapsible cards. Repeating records such as ideas, tasks, expenses, interactions and activities can be added, edited and deleted individually. Edits are automatically saved to the local SQLite database after a short pause, with a manual save control whenever there are unsaved changes. Pending edits are also saved when a section is backgrounded or closed. Each calendar date has its own independent record. Use the dashboard calendar icon labelled “New day / choose date” to open a date; saved dates reopen their records and dates without records start blank. Nothing is copied from the previous day. Text inputs have explicit compact / multiline size limits so one field cannot expand to fill the screen. Single-line fields use a compact 62-pixel height; long-text fields use a bounded 140-pixel writing area. The section editor shows autosave state, supports manual retry after a failed save, and provides empty states for repeatable lists.
 
 The app also includes history, a basic seven-record insights view, quick capture to the Ideaverse inbox, Markdown export and JSON backup/restore.
 
@@ -73,3 +73,8 @@ docs/original-project-notes.txt
 - The insights view is descriptive, not medical or financial advice.
 - The master-data editor, custom tags, photo/voice attachments, PIN or biometric app lock, and scheduled reminders are not included yet.
 - Some values that the original specification described as automatic (for example, financial totals and time-allocation totals) are entered manually in this build.
+
+
+## Widget-test diagnostics
+
+The widget suite tests each supported field renderer independently and also checks that all field types can coexist in a scrollable form. GitHub Actions runs `flutter test --reporter expanded` to provide detailed failure output.
